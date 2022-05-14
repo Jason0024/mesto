@@ -1,0 +1,9 @@
+.element-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 282px);
+  list-style: none;
+  padding: 0;
+  margin: 51px 0 0;
+  line-height: 0;
+  gap: 20px 17px;
+}
