@@ -3,19 +3,26 @@ let closeButton = document.querySelector('.popup__close');
 let editButton = document.querySelector('.profile__edit');
 let popup = document.querySelector('.popup');
 
+// Находим форму в DOM
+let formElement = document.querySelector('.popup__form');
+
+// Находим поля формы в DOM
+let nameInput = document.querySelector('.popup__input_type_name');
+let jobInput = document.querySelector('.popup__input_type_job');
+let formName = document.querySelector('.profile__name');
+let formJob = document.querySelector('.profile__job');
+
 // Открытие-Закрытие попапа
 function popupToggle(evt) {
   popup.classList.toggle('popup_open');
+  nameInput.value = formName.textContent;
+  jobInput.value = formJob.textContent;
 }
 // Устанавливаем функцию на кнопки
 closeButton.addEventListener('click', popupToggle);
 editButton.addEventListener('click', popupToggle);
 
-// Находим форму в DOM
-let formElement = document.querySelector('.popup__container');
-// Находим поля формы в DOM
-let nameInput = document.querySelector('.popup__input_type_name');
-let jobInput = document.querySelector('.popup__input_type_job');
+
 
 // Обработчик формы
 function formSubmitHandler (evt) {
