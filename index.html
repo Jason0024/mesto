@@ -20,9 +20,9 @@
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив кусто</h1>
         <p class="profile__job">Исследователь океана</p>
-        <button class="profile__edit-button" type="button">Редактировать</button>
+        <button class="profile__edit" type="button">Редактировать</button>
       </div>
-      <button class="profile__add-button" type="button">Добавить фото</button>
+      <button class="add-button" type="button">Добавить фото</button>
     </section>
 
     <section class="elements">
@@ -31,7 +31,7 @@
           <img src="./images/karachevsk.png" alt="Заброшенная церковь в горах" class="element-grid__pic">
           <div class="element-grid__item-description">
             <h2 class="element-grid__title">Карачевск</h2>
-            <button class="element-grid__like" type="button">Лайк</button>
+            <button type="button" class="element-grid__like">Нравится</button>
           </div>
         </li>
 
@@ -39,7 +39,7 @@
           <img src="./images/goraElbrus.png" alt="Горы Эльбрус" class="element-grid__pic">
           <div class="element-grid__item-description">
             <h2 class="element-grid__title">Гора Эльбрус</h2>
-            <button class="element-grid__like" type="button">Лайк</button>
+            <button type="button" class="element-grid__like">Нравится</button>
           </div>
         </li>
 
@@ -47,7 +47,7 @@
           <img src="./images/dombai.png" alt="Лес и Подножие горы в Домбаи" class="element-grid__pic">
           <div class="element-grid__item-description">
             <h2 class="element-grid__title">Домбаи</h2>
-            <button class="element-grid__like" type="button">Лайк</button>
+            <button type="button" class="element-grid__like">Нравится</button>
           </div>
         </li>
 
@@ -55,7 +55,7 @@
           <img src="./images/moskow.jpg" alt="Церковь на красной площади Москвы" class="element-grid__pic">
           <div class="element-grid__item-description">
             <h2 class="element-grid__title">Москва</h2>
-            <button class="element-grid__like" type="button">Лайк</button>
+            <button type="button" class="element-grid__like">Нравится</button>
           </div>
         </li>
 
@@ -63,7 +63,7 @@
           <img src="./images/lakeBashkunchak.jpg" alt="Дорога на озере Башкунчан" class="element-grid__pic">
           <div class="element-grid__item-description">
             <h2 class="element-grid__title">Озеро Башкунчан</h2>
-            <button class="element-grid__like" type="button">Лайк</button>
+            <button type="button" class="element-grid__like">Нравится</button>
           </div>
         </li>
 
@@ -71,15 +71,30 @@
           <img src="./images/kabardinoBolgaria.jpg" alt="Вид сверху на горы Кабардино-Болкарии" class="element-grid__pic">
           <div class="element-grid__item-description">
             <h2 class="element-grid__title">Кабардино-Балкария</h2>
-            <button class="element-grid__like" type="button">Лайк</button>
+            <button type="button" class="element-grid__like">Нравится</button>
           </div>
         </li>
       </ul>
 
     </section>
-
   </main>
 
+  <footer class="footer">
+    &copy; 2022 Mesto Russia
+  </footer>
+
+  <div class="popup">
+    <form action="" method="POST" class="popup__container">
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <input type="text" value="Жак-Ив Кусто" placeholder="Ваше имя" class="popup__input popup__input_type_name">
+      <input type="text" value="Исследователь океана" placeholder="Чем занимаетесь?" class="popup__input popup__input_type_job">
+      <button type="submit" class="popup__submit">Сохранить</button>
+      <button class="popup__close" type="button">Закрыть</button>
+    </form>
+  </div>
+
+  <script src="blocks/popup/popup.js"></script>
+  <script src="blocks/element-grid/__like/element-grid__like.js"></script>
 </body>
 
 </html>
