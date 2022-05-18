@@ -5,7 +5,7 @@ let popup = document.querySelector('.popup');
 
 // Открытие-Закрытие попапа
 function popupToggle(evt) {
-  popup.classList.toggle('popup_opened');
+  popup.classList.toggle('popup_open');
 }
 // Устанавливаем функцию на кнопки
 closeButton.addEventListener('click', popupToggle);
