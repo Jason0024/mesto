@@ -10,7 +10,7 @@
 <body class="page">
 
   <header class="header">
-    <img src="./images/Vector.png" alt="Mesto - Russia" class="header__logo">
+    <img src="./images/Vector.png" alt="Место - Russia" class="header__logo">
   </header>
 
   <main class="content">
@@ -18,15 +18,108 @@
     <section class="profile">
       <img src="./images/avatar.jpg" alt="Жак-Ив Кусто" class="profile__avatar">
       <div class="profile__info">
-        <h1 class="profile__name">Жак-Ив кусто</h1>
+        <h1 class="profile__name">Жак-Ив Кусто</h1>
         <p class="profile__job">Исследователь океана</p>
-        <button class="profile__edit-button" type="button">Редактировать</button>
+        <button class="profile__edit" type="button">Редактировать</button>
       </div>
-      <button class="profile__add-button" type="button">Добавить фото</button>
+      <button class="add-button" type="button">Добавить фото</button>
     </section>
 
+    <section class="elements">
+      <ul class="element-grid">
+       <!--
+        <li class="element-grid__item">
+          <img src="./images/karachevsk.png" alt="Заброшенная церковь в горах" class="element-grid__pic">
+          <div class="element-grid__item-description">
+            <h2 class="element-grid__title">Карачевск</h2>
+            <button type="button" class="element-grid__like">Нравится</button>
+          </div>
+        </li>
+
+        <li class="element-grid__item">
+          <img src="./images/goraElbrus.png" alt="Горы Эльбрус" class="element-grid__pic">
+          <div class="element-grid__item-description">
+            <h2 class="element-grid__title">Гора Эльбрус</h2>
+            <button type="button" class="element-grid__like">Нравится</button>
+          </div>
+        </li>
+
+        <li class="element-grid__item">
+          <img src="./images/dombai.png" alt="Лес и Подножие горы в Домбаи" class="element-grid__pic">
+          <div class="element-grid__item-description">
+            <h2 class="element-grid__title">Домбаи</h2>
+            <button type="button" class="element-grid__like">Нравится</button>
+          </div>
+        </li>
+
+        <li class="element-grid__item">
+          <img src="./images/novorossiysk.jpg" alt="Церковь на фоне озера" class="element-grid__pic">
+          <div class="element-grid__item-description">
+            <h2 class="element-grid__title">Новороссийск</h2>
+            <button type="button" class="element-grid__like">Нравится</button>
+          </div>
+        </li>
+
+        <li class="element-grid__item">
+          <img src="./images/lakeBashkunchak.jpg" alt="Дорога на озере Башкунчан" class="element-grid__pic">
+          <div class="element-grid__item-description">
+            <h2 class="element-grid__title">Озеро Башкунчан</h2>
+            <button type="button" class="element-grid__like">Нравится</button>
+          </div>
+        </li>
+
+        <li class="element-grid__item">
+          <img src="./images/kabardinoBolgaria.jpg" alt="Вид сверху на горы Кабардино-Болкарии" class="element-grid__pic">
+          <div class="element-grid__item-description">
+            <h2 class="element-grid__title">Кабардино-Балкария</h2>
+            <button type="button" class="element-grid__like">Нравится</button>
+          </div>
+        </li>
+      -->
+      </ul>
+
+    </section>
   </main>
 
+  <footer class="footer">
+    <p>&copy; 2022 Mesto Russia</p>
+  </footer>
+
+  <div class="popup popup_type_profile">
+    <div class="popup__container">
+      <button class="popup__close" type="button">Закрыть</button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="popup__form popup__form_profile-type" method="POST" name="edit-profile">
+        <input type="text" placeholder="Жак-Ив Кусто" class="popup__input popup__input_name_type" name="profile-name">
+        <input type="text" placeholder="Чем занимаетесь?" class="popup__input popup__input_job_type" name="profile-job">
+        <button type="submit" class="popup__submit">Сохранить</button>
+    </form>
+  </div>
+  </div>
+
+   <div class="popup popup_type_photo">
+    <div class="popup__container">
+      <button class="popup__close" type="button">Закрыть</button>
+      <form class="popup__form popup__form_photo-type" method="POST" name="add-photo">
+        <h2 class="form__title">Новое место</h2>
+        <input type="text"  placeholder="Название" class="popup__input popup__input_title_type" name="photo-title">
+        <input type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_src_type" name="photo-src">
+        <button type="submit" class="popup__submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <template id="element-grid-template" class="element-grid-template">
+    <li class="element-grid__item">
+      <img src="" alt="" class="element-grid__pic">
+      <div class="element-grid__item-description">
+        <h2 class="element-grid__title"></h2>
+        <button type="button" class="element-grid__like">Нравится</button>
+      </div>
+    </li>
+  </template>
+
+  <script src="./scripts/index.js"></script>
 </body>
 
 </html>
