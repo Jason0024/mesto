@@ -27,6 +27,7 @@
 
     <section class="elements">
       <ul class="element-grid">
+       <!--
         <li class="element-grid__item">
           <img src="./images/karachevsk.png" alt="Заброшенная церковь в горах" class="element-grid__pic">
           <div class="element-grid__item-description">
@@ -74,6 +75,7 @@
             <button type="button" class="element-grid__like">Нравится</button>
           </div>
         </li>
+      -->
       </ul>
 
     </section>
@@ -83,17 +85,39 @@
     <p>&copy; 2022 Mesto Russia</p>
   </footer>
 
-  <div class="popup">
+  <div class="popup popup_type_profile">
     <div class="popup__container">
+      <button class="popup__close" type="button">Закрыть</button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form" method="POST" name="edit-profile">
-        <input type="text" placeholder="Жак-Ив Кусто" class="popup__input popup__input_type_name" name="profile-name">
-        <input type="text" placeholder="Чем занимаетесь?" class="popup__input popup__input_type_job" name="profile-job">
+      <form class="popup__form popup__form_profile-type" method="POST" name="edit-profile">
+        <input type="text" placeholder="Жак-Ив Кусто" class="popup__input popup__input_name_type" name="profile-name">
+        <input type="text" placeholder="Чем занимаетесь?" class="popup__input popup__input_job_type" name="profile-job">
         <button type="submit" class="popup__submit">Сохранить</button>
     </form>
-    <button class="popup__close" type="button">Закрыть</button>
   </div>
   </div>
+
+   <div class="popup popup_type_photo">
+    <div class="popup__container">
+      <button class="popup__close" type="button">Закрыть</button>
+      <form class="popup__form popup__form_photo-type" method="POST" name="add-photo">
+        <h2 class="form__title">Новое место</h2>
+        <input type="text"  placeholder="Название" class="popup__input popup__input_title_type" name="photo-title">
+        <input type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_src_type" name="photo-src">
+        <button type="submit" class="popup__submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <template id="element-grid-template" class="element-grid-template">
+    <li class="element-grid__item">
+      <img src="" alt="" class="element-grid__pic">
+      <div class="element-grid__item-description">
+        <h2 class="element-grid__title"></h2>
+        <button type="button" class="element-grid__like">Нравится</button>
+      </div>
+    </li>
+  </template>
 
   <script src="./scripts/index.js"></script>
 </body>
