@@ -80,7 +80,7 @@ function addPhoto(name, link) {
     const modalSrc = popupModal.querySelector('.popup__pic');
     const modalTitle = popupModal.querySelector('.popup__caption');
 
-    popupOpen(popupModal);
+    openPopup(popupModal);
     modalTitle.textContent = name;
     modalSrc.alt = name;
     modalSrc.src = link;
