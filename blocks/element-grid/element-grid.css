@@ -8,13 +8,13 @@
   gap: 20px 17px;
 }
 
-@media screen and (max-width: 880px) {
+@media screen and (max-width: 897px) {
   .element-grid {
-    grid-template-columns: repeat(2, 50%);
+    grid-template-columns: repeat(2, calc(50%) );
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   .element-grid {
     grid-template-columns: minmax(282px, 1fr);
     margin-right: 0px;

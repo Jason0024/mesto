@@ -1,61 +1,34 @@
 // Кнопки
-const addButton  = document.querySelector('.add-button');
-const closeButton = document.querySelectorAll('.popup__close');
-const editButton = document.querySelector('.profile__edit');
-const deleteButton = document.querySelector('.element-grid__delete');
+const addCardButton  = document.querySelector('.add-button');
+const closeButtons = document.querySelectorAll('.popup__close');
+const editProfileButton = document.querySelector('.profile__edit');
 
 // Шаблон для фото
-const photoContainer = document.querySelector('.element-grid');
+const photosContainer = document.querySelector('.element-grid');
 const photoTemplate = document.querySelector('#element-grid-template');
 
 // Попапы
 const popup = document.querySelector('.popup');
 const popupProfile = document.querySelector('.popup_type_profile');
-const popupPhoto = document.querySelector('.popup_type_photo');
+const popupPhotoCard = document.querySelector('.popup_type_photo');
 
 // Профиль
 const formProfile = document.querySelector('.popup__form_profile-type');
-const nameInput = document.querySelector('.popup__input_name_type');
-const jobInput = document.querySelector('.popup__input_job_type');
+const nameInput = document.querySelector('.popup__input_type_name');
+const jobInput = document.querySelector('.popup__input_type_job');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
 
 // Фото
 const formPhoto = document.querySelector('.popup__form_photo-type');
-const photoTitleInput = document.querySelector('.popup__input_title_type');
-const photoLinkInput = document.querySelector('.popup__input_src_type');
+const photoTitleInput = document.querySelector('.popup__input_type_title');
+const photoLinkInput = document.querySelector('.popup__input_type_src');
 
 const elementTemplate = document.querySelector('.element-grid-template').content;
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 // Инициализируем карточки
-function addPhoto(name, link) {
+function createPhotoElement(name, link) {
   function handleDeletePhoto(e) {
       e.target.closest('.element-grid__item').remove();
   }
@@ -64,59 +37,55 @@ function addPhoto(name, link) {
     e.target.classList.toggle('element-grid__like_active');
   }
 
-  const newPhoto = photoTemplate.content.querySelector('.element-grid__item').cloneNode(true);
-  const photoSrc = newPhoto.querySelector('.element-grid__pic');
-  const photoTitle = newPhoto.querySelector('.element-grid__title');
-  const deleteButton = newPhoto.querySelector('.element-grid__delete');
-  const likeButton = newPhoto.querySelector('.element-grid__like');
+  const newPhotoElement = photoTemplate.content.querySelector('.element-grid__item').cloneNode(true);
+  const photoSrcElement = newPhotoElement.querySelector('.element-grid__pic');
+  const photoTitle = newPhotoElement.querySelector('.element-grid__title');
+  const deleteButton = newPhotoElement.querySelector('.element-grid__delete');
+  const likeButton = newPhotoElement.querySelector('.element-grid__like');
 
   photoTitle.textContent = name;
-  photoSrc.alt = name;
-  photoSrc.src = link;
+  photoSrcElement.alt = name;
+  photoSrcElement.src = link;
 
-  function handleModal() {
+  function openImage() {
 
     const popupModal = document.querySelector('.popup_type_modal');
-    const modalSrc = popupModal.querySelector('.popup__pic');
+    const modalSrcElement = popupModal.querySelector('.popup__pic');
     const modalTitle = popupModal.querySelector('.popup__caption');
 
     openPopup(popupModal);
     modalTitle.textContent = name;
-    modalSrc.alt = name;
-    modalSrc.src = link;
+    modalSrcElement.alt = name;
+    modalSrcElement.src = link;
 
   }
 
   deleteButton.addEventListener('click', handleDeletePhoto);
   likeButton.addEventListener('click', handleLike);
-  photoSrc.addEventListener('click', handleModal);
+  photoSrcElement.addEventListener('click', openImage);
 
-  return newPhoto;
+  return newPhotoElement;
 }
 
 initialCards.forEach(function(item) {
-  const newCard = addPhoto(item['name'], item['link']);
-  photoContainer.append(newCard);
+  const newCard = createPhotoElement(item.name, item.link);
+  photosContainer.append(newCard);
 });
 
-// Обработчик «отправки» формы
-function formSubmitHandler (evt) {
+// Обработчик «отправки» формы карточки
+function submitFormHandler (evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-
-    // Получите значение полей jobInput и nameInput из свойства value
-    profileName.textContent = nameInput.value;
-    profileJob.textContent = jobInput.value;
 
     // Форма добавления фото
     if (photoTitleInput.value && photoLinkInput.value) {
-      photoContainer.prepend(addPhoto(photoTitleInput.value, photoLinkInput.value));
+      photosContainer.prepend(createPhotoElement(photoTitleInput.value, photoLinkInput.value));
       // Очищаем поля
       photoTitleInput.value = '';
       photoLinkInput.value = '';
     }
 
     // Закрываем попап
-    popupClose();
+    closePopup(popupPhotoCard);
 }
 
 // Открытие попапа
@@ -131,8 +100,8 @@ function openPopupProfile() {
   openPopup(popupProfile);
  };
 
-//Обработчик формы
- function formSubmitHandlerProfile(event) {
+//Обработчик формы профиля
+ function submitFormHandlerProfile(event) {
   event.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
@@ -141,11 +110,11 @@ function openPopupProfile() {
 
 //Попап Фото
 function openPopupPhoto() {
-  openPopup(popupPhoto);
+  openPopup(popupPhotoCard);
 };
 
 //Закрытие попапов
-closeButton.forEach((button) => {
+closeButtons.forEach((button) => {
   const popup = button.closest(".popup");
   button.addEventListener("click", () => closePopup(popup));
 });
@@ -159,8 +128,8 @@ function closePopup(popup) {
 
 
 //События
-addButton.addEventListener('click',openPopupPhoto);
-editButton.addEventListener('click', openPopupProfile);
+addCardButton.addEventListener('click',openPopupPhoto);
+editProfileButton.addEventListener('click', openPopupProfile);
 
-formProfile.addEventListener('submit', formSubmitHandlerProfile);
-formPhoto.addEventListener('submit', formSubmitHandler);
+formProfile.addEventListener('submit', submitFormHandlerProfile);
+formPhoto.addEventListener('submit', submitFormHandler);
