@@ -77,12 +77,14 @@ function handleFormProfile (evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
 
     // Форма добавления фото
-    if (photoTitleInput.value && photoLinkInput.value) {
       photosContainer.prepend(createCardElement(photoTitleInput.value, photoLinkInput.value));
       // Очищаем поля
       photoTitleInput.value = '';
       photoLinkInput.value = '';
-    }
+
+      const inputList = Array.from(formPhoto.querySelectorAll('.popup__input'));
+      const buttonElement = formPhoto.querySelector('.popup__submit');
+      toggleButtonState(inputList, buttonElement);
 
     // Закрываем попап
     closePopup(popupPhotoCard);
@@ -122,9 +124,24 @@ function closePopup(popup) {
   popup.classList.remove("popup_open")
 };
 
+function keyHandler(evt) {
+  // проверяем есть ли открытый попап и только тогда закрываем
+  const activePopup = document.querySelector('.popup_open');
+  if (activePopup && evt.key === 'Escape') {
+    closePopup(activePopup);
+  }
+}
 
+function overlayHandler(evt) {
+  const activePopup = document.querySelector('.popup_open');
 
+  if (activePopup && evt.target === activePopup ) {
+    closePopup(activePopup);
+  }
+}
 
+// включение валидации вызовом enableValidation
+enableValidation();
 
 
 //События
@@ -133,3 +150,6 @@ editProfileButton.addEventListener('click', openPopupProfile);
 
 formProfile.addEventListener('submit', handleSubmitProfile);
 formPhoto.addEventListener('submit', handleFormProfile);
+
+document.addEventListener('keydown', keyHandler);
+document.addEventListener('click', overlayHandler);
