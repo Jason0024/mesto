@@ -26,57 +26,7 @@
     </section>
 
     <section class="elements">
-      <ul class="element-grid">
-<!--
-        <li class="element-grid__item">
-          <img src="./images/karachevsk.png" alt="Заброшенная церковь в горах" class="element-grid__pic">
-          <div class="element-grid__item-description">
-            <h2 class="element-grid__title">Карачевск</h2>
-            <button type="button" class="element-grid__like">Нравится</button>
-          </div>
-        </li>
-
-        <li class="element-grid__item">
-          <img src="./images/goraElbrus.png" alt="Горы Эльбрус" class="element-grid__pic">
-          <div class="element-grid__item-description">
-            <h2 class="element-grid__title">Гора Эльбрус</h2>
-            <button type="button" class="element-grid__like">Нравится</button>
-          </div>
-        </li>
-
-        <li class="element-grid__item">
-          <img src="./images/dombai.png" alt="Лес и Подножие горы в Домбаи" class="element-grid__pic">
-          <div class="element-grid__item-description">
-            <h2 class="element-grid__title">Домбаи</h2>
-            <button type="button" class="element-grid__like">Нравится</button>
-          </div>
-        </li>
-
-        <li class="element-grid__item">
-          <img src="./images/novorossiysk.jpg" alt="Церковь на фоне озера" class="element-grid__pic">
-          <div class="element-grid__item-description">
-            <h2 class="element-grid__title">Новороссийск</h2>
-            <button type="button" class="element-grid__like">Нравится</button>
-          </div>
-        </li>
-
-        <li class="element-grid__item">
-          <img src="./images/lakeBashkunchak.jpg" alt="Дорога на озере Башкунчан" class="element-grid__pic">
-          <div class="element-grid__item-description">
-            <h2 class="element-grid__title">Озеро Башкунчан</h2>
-            <button type="button" class="element-grid__like">Нравится</button>
-          </div>
-        </li>
-
-        <li class="element-grid__item">
-          <img src="./images/kabardinoBolgaria.jpg" alt="Вид сверху на горы Кабардино-Болкарии" class="element-grid__pic">
-          <div class="element-grid__item-description">
-            <h2 class="element-grid__title">Кабардино-Балкария</h2>
-            <button type="button" class="element-grid__like">Нравится</button>
-          </div>
-        </li>
-      -->
-            </ul>
+      <ul class="element-grid"></ul>
 
     </section>
   </main>
@@ -88,10 +38,16 @@
   <div class="popup popup_type_profile">
     <div class="popup__container">
       <button class="popup__close" type="button">Закрыть</button>
-      <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form popup__form_profile-type" method="POST" name="edit-profile">
-        <input type="text" placeholder="Жак-Ив Кусто" class="popup__input popup__input_name_type" name="profile-name">
-        <input type="text" placeholder="Чем занимаетесь?" class="popup__input popup__input_job_type" name="profile-job">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <label class="popup__field">
+        <input type="text" value="Жак-Ив Кусто" placeholder="Ваше имя" class="popup__input popup__input_type_name" name="profile-name" id="profile-name" minlength="2" maxlength="40" required>
+        <span class="popup__input-error profile-name-error"></span>
+        </label>
+        <label class="popup__field">
+        <input type="text" value="Исследователь океана" placeholder="Чем занимаетесь?" class="popup__input popup__input_type_job" name="profile-job" id="profile-job" minlength="2" maxlength="200" required>
+        <span class="popup__input-error profile-name-error"></span>
+       </label>
         <button type="submit" class="popup__submit">Сохранить</button>
     </form>
   </div>
@@ -101,9 +57,15 @@
     <div class="popup__container">
       <button class="popup__close" type="button">Закрыть</button>
       <form class="popup__form popup__form_photo-type" method="POST" name="add-photo">
-        <h2 class="form__title">Новое место</h2>
-        <input type="text"  placeholder="Название" class="popup__input popup__input_title_type" name="photo-title">
-        <input type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_src_type" name="photo-src">
+        <h2 class="popup__title">Новое место</h2>
+        <label class="popup__field">
+        <input type="text"  value="" placeholder="Название" class="popup__input popup__input_type_title" name="photo-title" id="photo-title" minlength="2" maxlength="40" required>
+        <span class="popup__input-error photo-title-error"></span>
+        </label>
+        <label class="popup__field">
+        <input type="url" value="" placeholder="Ссылка на картинку" class="popup__input popup__input_type_src" name="photo-src" id="photo-src" required>
+        <span class="popup__input-error photo-src-error"></span>
+        </label>
         <button type="submit" class="popup__submit">Создать</button>
       </form>
     </div>
@@ -120,7 +82,7 @@
   <template id="element-grid-template" class="element-grid-template">
     <li class="element-grid__item">
       <button type="button" class="element-grid__delete">Удалить</button>
-      <img src="" alt="" class="element-grid__pic">
+      <img src="./images/Vector.png" alt="" class="element-grid__pic">
       <div class="element-grid__item-description">
         <h2 class="element-grid__title"></h2>
         <button type="button" class="element-grid__like">Нравится</button>
@@ -128,6 +90,8 @@
     </li>
   </template>
 
+ <script src="./scripts/initialsCards.js"></script>
+ <script src="./scripts/validation.js"></script>
  <script src="./scripts/index.js"></script>
 </body>
 
