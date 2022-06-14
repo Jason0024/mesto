@@ -28,7 +28,7 @@ const elementTemplate = document.querySelector('.element-grid-template').content
 
 
 // Инициализируем карточки
-function createPhotoElement(name, link) {
+function createCardElement(name, link) {
   function handleDeletePhoto(e) {
       e.target.closest('.element-grid__item').remove();
   }
@@ -37,48 +37,48 @@ function createPhotoElement(name, link) {
     e.target.classList.toggle('element-grid__like_active');
   }
 
-  const newPhotoElement = photoTemplate.content.querySelector('.element-grid__item').cloneNode(true);
-  const photoSrcElement = newPhotoElement.querySelector('.element-grid__pic');
-  const photoTitle = newPhotoElement.querySelector('.element-grid__title');
-  const deleteButton = newPhotoElement.querySelector('.element-grid__delete');
-  const likeButton = newPhotoElement.querySelector('.element-grid__like');
+  const newCard = photoTemplate.content.querySelector('.element-grid__item').cloneNode(true);
+  const photo = newCard.querySelector('.element-grid__pic');
+  const photoTitle = newCard.querySelector('.element-grid__title');
+  const deleteButton = newCard.querySelector('.element-grid__delete');
+  const likeButton = newCard.querySelector('.element-grid__like');
 
   photoTitle.textContent = name;
-  photoSrcElement.alt = name;
-  photoSrcElement.src = link;
+  photo.alt = name;
+  photo.src = link;
 
   function openImage() {
 
     const popupModal = document.querySelector('.popup_type_modal');
-    const modalSrcElement = popupModal.querySelector('.popup__pic');
+    const image = popupModal.querySelector('.popup__pic');
     const modalTitle = popupModal.querySelector('.popup__caption');
 
     openPopup(popupModal);
     modalTitle.textContent = name;
-    modalSrcElement.alt = name;
-    modalSrcElement.src = link;
+    image.alt = name;
+    image.src = link;
 
   }
 
   deleteButton.addEventListener('click', handleDeletePhoto);
   likeButton.addEventListener('click', handleLike);
-  photoSrcElement.addEventListener('click', openImage);
+  photo.addEventListener('click', openImage);
 
-  return newPhotoElement;
+  return newCard;
 }
 
 initialCards.forEach(function(item) {
-  const newCard = createPhotoElement(item.name, item.link);
+  const newCard = createCardElement(item.name, item.link);
   photosContainer.append(newCard);
 });
 
 // Обработчик «отправки» формы карточки
-function submitFormHandler (evt) {
+function handleFormProfile (evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
 
     // Форма добавления фото
     if (photoTitleInput.value && photoLinkInput.value) {
-      photosContainer.prepend(createPhotoElement(photoTitleInput.value, photoLinkInput.value));
+      photosContainer.prepend(createCardElement(photoTitleInput.value, photoLinkInput.value));
       // Очищаем поля
       photoTitleInput.value = '';
       photoLinkInput.value = '';
@@ -101,7 +101,7 @@ function openPopupProfile() {
  };
 
 //Обработчик формы профиля
- function submitFormHandlerProfile(event) {
+ function handleSubmitProfile(event) {
   event.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
@@ -131,5 +131,5 @@ function closePopup(popup) {
 addCardButton.addEventListener('click',openPopupPhoto);
 editProfileButton.addEventListener('click', openPopupProfile);
 
-formProfile.addEventListener('submit', submitFormHandlerProfile);
-formPhoto.addEventListener('submit', submitFormHandler);
+formProfile.addEventListener('submit', handleSubmitProfile);
+formPhoto.addEventListener('submit', handleFormProfile);
