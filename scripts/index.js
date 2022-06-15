@@ -141,8 +141,19 @@ function overlayHandler(evt) {
 }
 
 // включение валидации вызовом enableValidation
-enableValidation();
+// включение валидации вызовом enableValidation
+// все настройки передаются при вызове
 
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+};
+
+enableValidation(config);
 
 //События
 addCardButton.addEventListener('click',openPopupPhoto);
