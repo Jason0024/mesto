@@ -1,5 +1,5 @@
 // Кнопки
-const addCardButton  = document.querySelector('.add-button');
+const cardAddButton  = document.querySelector('.add-button');
 const closeButtons = document.querySelectorAll('.popup__close');
 const editProfileButton = document.querySelector('.profile__edit');
 
@@ -29,42 +29,40 @@ const elementTemplate = document.querySelector('.element-grid-template').content
 
 // Инициализируем карточки
 function createCardElement(name, link) {
-  function handleDeletePhoto(e) {
-      e.target.closest('.element-grid__item').remove();
-  }
-
-  function handleLike(e) {
-    e.target.classList.toggle('element-grid__like_active');
-  }
-
   const newCard = photoTemplate.content.querySelector('.element-grid__item').cloneNode(true);
   const photo = newCard.querySelector('.element-grid__pic');
   const photoTitle = newCard.querySelector('.element-grid__title');
-  const deleteButton = newCard.querySelector('.element-grid__delete');
-  const likeButton = newCard.querySelector('.element-grid__like');
+  const buttonDelete = newCard.querySelector('.element-grid__delete');
+  const buttonLike = newCard.querySelector('.element-grid__like');
+
+  const popupModal = document.querySelector('.popup_type_modal');
+  const image = popupModal.querySelector('.popup__pic');
+  const modalTitle = popupModal.querySelector('.popup__caption');
 
   photoTitle.textContent = name;
   photo.alt = name;
   photo.src = link;
 
   function openImage() {
-
-    const popupModal = document.querySelector('.popup_type_modal');
-    const image = popupModal.querySelector('.popup__pic');
-    const modalTitle = popupModal.querySelector('.popup__caption');
-
-    openPopup(popupModal);
     modalTitle.textContent = name;
     image.alt = name;
     image.src = link;
-
+    openPopup(popupModal);
   }
 
-  deleteButton.addEventListener('click', handleDeletePhoto);
-  likeButton.addEventListener('click', handleLike);
+  buttonDelete.addEventListener('click', handleDeletePhoto);
+  buttonLike.addEventListener('click', handleLike);
   photo.addEventListener('click', openImage);
 
   return newCard;
+}
+
+function handleDeletePhoto(e) {
+  e.target.closest('.element-grid__item').remove();
+}
+
+function handleLike(e) {
+  e.target.classList.toggle('element-grid__like_active');
 }
 
 initialCards.forEach(function(item) {
@@ -79,8 +77,7 @@ function handleFormProfile (evt) {
     // Форма добавления фото
       photosContainer.prepend(createCardElement(photoTitleInput.value, photoLinkInput.value));
       // Очищаем поля
-      photoTitleInput.value = '';
-      photoLinkInput.value = '';
+      formPhoto.reset();
 
       const inputList = Array.from(formPhoto.querySelectorAll('.popup__input'));
       const buttonElement = formPhoto.querySelector('.popup__submit');
@@ -89,11 +86,6 @@ function handleFormProfile (evt) {
     // Закрываем попап
     closePopup(popupPhotoCard);
 }
-
-// Открытие попапа
-function openPopup(event) {
-  event.classList.add("popup_open")
- };
 
 //Попап Профиля
 function openPopupProfile() {
@@ -115,34 +107,44 @@ function openPopupPhoto() {
   openPopup(popupPhotoCard);
 };
 
+// Открытие попапа
+function openPopup(popupName) {
+  popup.addEventListener("mousedown", overlayHandler);
+  document.addEventListener("keydown", keyHandler);
+  popup.classList.add("popup_open");
+ };
+
 //Закрытие попапов
 closeButtons.forEach((button) => {
   const popup = button.closest(".popup");
   button.addEventListener("click", () => closePopup(popup));
 });
+
 function closePopup(popup) {
-  popup.classList.remove("popup_open")
+  popup.removeEventListener("mousedown", overlayHandler);
+  document.removeEventListener("keydown", keyHandler);
+  popup.classList.remove("popup_open");
 };
 
+
+function closeOpenedPopup() {
+  const openedPopup = document.querySelector(".popup_open");
+  closePopup(openedPopup);
+};
+
+
 function keyHandler(evt) {
-  // проверяем есть ли открытый попап и только тогда закрываем
-  const activePopup = document.querySelector('.popup_open');
-  if (activePopup && evt.key === 'Escape') {
-    closePopup(activePopup);
+  if (evt.key === 'Escape') {
+    closeOpenedPopup();
   }
 }
 
 function overlayHandler(evt) {
-  const activePopup = document.querySelector('.popup_open');
-
-  if (activePopup && evt.target === activePopup ) {
-    closePopup(activePopup);
+  if (evt.target === evt.currentTarget) {
+    closeOpenedPopup();
   }
 }
 
-// включение валидации вызовом enableValidation
-// включение валидации вызовом enableValidation
-// все настройки передаются при вызове
 
 const config = {
   formSelector: '.popup__form',
@@ -156,11 +158,9 @@ const config = {
 enableValidation(config);
 
 //События
-addCardButton.addEventListener('click',openPopupPhoto);
+cardAddButton.addEventListener('click',openPopupPhoto);
 editProfileButton.addEventListener('click', openPopupProfile);
 
 formProfile.addEventListener('submit', handleSubmitProfile);
 formPhoto.addEventListener('submit', handleFormProfile);
 
-document.addEventListener('keydown', keyHandler);
-document.addEventListener('click', overlayHandler);
