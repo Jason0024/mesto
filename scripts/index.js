@@ -1,6 +1,6 @@
 // Кнопки
 const cardAddButton  = document.querySelector('.add-button');
-const closeButtons = document.querySelectorAll('.popup__close');
+const CardCloseButtons = document.querySelectorAll('.popup__close');
 const editProfileButton = document.querySelector('.profile__edit');
 
 // Шаблон для фото
@@ -8,7 +8,7 @@ const photosContainer = document.querySelector('.element-grid');
 const photoTemplate = document.querySelector('#element-grid-template');
 
 // Попапы
-const popup = document.querySelector('.popup');
+const AllPopups = document.querySelector('.popup');
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupPhotoCard = document.querySelector('.popup_type_photo');
 
@@ -23,9 +23,6 @@ const profileJob = document.querySelector('.profile__job');
 const formPhoto = document.querySelector('.popup__form_photo-type');
 const photoTitleInput = document.querySelector('.popup__input_type_title');
 const photoLinkInput = document.querySelector('.popup__input_type_src');
-
-const elementTemplate = document.querySelector('.element-grid-template').content;
-
 
 // Инициализируем карточки
 function createCardElement(name, link) {
@@ -72,7 +69,7 @@ initialCards.forEach(function(item) {
 
 // Обработчик «отправки» формы карточки
 function handleFormProfile (evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+    evt.preventDefault();
 
     // Форма добавления фото
       photosContainer.prepend(createCardElement(photoTitleInput.value, photoLinkInput.value));
@@ -108,14 +105,14 @@ function openPopupPhoto() {
 };
 
 // Открытие попапа
-function openPopup(popupName) {
+function openPopup(popup) {
   popup.addEventListener("mousedown", overlayHandler);
   document.addEventListener("keydown", keyHandler);
   popup.classList.add("popup_open");
  };
 
 //Закрытие попапов
-closeButtons.forEach((button) => {
+CardCloseButtons.forEach((button) => {
   const popup = button.closest(".popup");
   button.addEventListener("click", () => closePopup(popup));
 });
@@ -139,12 +136,18 @@ function keyHandler(evt) {
   }
 }
 
-function overlayHandler(evt) {
-  if (evt.target === evt.currentTarget) {
-    closeOpenedPopup();
-  }
-}
+//function overlayHandler(evt) {
+//  if (evt.target === evt.currentTarget) {
+//    closeOpenedPopup();
+//  }
+//}
 
+const overlayHandler = (evt) => {
+  if (evt.target !== evt.currentTarget) {
+    return;
+  }
+  closeOpenedPopup();
+};
 
 const config = {
   formSelector: '.popup__form',
