@@ -24,6 +24,10 @@ const formPhoto = document.querySelector('.popup__form_photo-type');
 const photoTitleInput = document.querySelector('.popup__input_type_title');
 const photoLinkInput = document.querySelector('.popup__input_type_src');
 
+const popupModal = document.querySelector('.popup_type_modal');
+const image = popupModal.querySelector('.popup__pic');
+const modalTitle = popupModal.querySelector('.popup__caption');
+
 // Инициализируем карточки
 function createCardElement(name, link) {
   const newCard = photoTemplate.content.querySelector('.element-grid__item').cloneNode(true);
@@ -31,10 +35,6 @@ function createCardElement(name, link) {
   const photoTitle = newCard.querySelector('.element-grid__title');
   const buttonDelete = newCard.querySelector('.element-grid__delete');
   const buttonLike = newCard.querySelector('.element-grid__like');
-
-  const popupModal = document.querySelector('.popup_type_modal');
-  const image = popupModal.querySelector('.popup__pic');
-  const modalTitle = popupModal.querySelector('.popup__caption');
 
   photoTitle.textContent = name;
   photo.alt = name;
