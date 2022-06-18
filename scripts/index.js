@@ -1,14 +1,13 @@
 // Кнопки
 const cardAddButton  = document.querySelector('.add-button');
-const CardCloseButtons = document.querySelectorAll('.popup__close');
-const editProfileButton = document.querySelector('.profile__edit');
+const popupCloseButtons = document.querySelectorAll('.popup__close');
+const profileEditButton = document.querySelector('.profile__edit');
 
 // Шаблон для фото
 const photosContainer = document.querySelector('.element-grid');
 const photoTemplate = document.querySelector('#element-grid-template');
 
 // Попапы
-const AllPopups = document.querySelector('.popup');
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupPhotoCard = document.querySelector('.popup_type_photo');
 
@@ -112,7 +111,7 @@ function openPopup(popup) {
  };
 
 //Закрытие попапов
-CardCloseButtons.forEach((button) => {
+popupCloseButtons.forEach((button) => {
   const popup = button.closest(".popup");
   button.addEventListener("click", () => closePopup(popup));
 });
@@ -136,18 +135,11 @@ function keyHandler(evt) {
   }
 }
 
-//function overlayHandler(evt) {
-//  if (evt.target === evt.currentTarget) {
-//    closeOpenedPopup();
-//  }
-//}
-
-const overlayHandler = (evt) => {
-  if (evt.target !== evt.currentTarget) {
-    return;
+function overlayHandler(evt) {
+  if (evt.target === evt.currentTarget) {
+    closeOpenedPopup(evt.currentTarget);
   }
-  closeOpenedPopup();
-};
+}
 
 const config = {
   formSelector: '.popup__form',
@@ -162,7 +154,7 @@ enableValidation(config);
 
 //События
 cardAddButton.addEventListener('click',openPopupPhoto);
-editProfileButton.addEventListener('click', openPopupProfile);
+profileEditButton.addEventListener('click', openPopupProfile);
 
 formProfile.addEventListener('submit', handleSubmitProfile);
 formPhoto.addEventListener('submit', handleFormProfile);
