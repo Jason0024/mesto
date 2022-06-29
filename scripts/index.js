@@ -1,14 +1,16 @@
+//Импорт модуля
+//import Card from './Card.js';
+
 // Кнопки
-const addCardButton  = document.querySelector('.add-button');
-const closeButtons = document.querySelectorAll('.popup__close');
-const editProfileButton = document.querySelector('.profile__edit');
+const cardAddButton  = document.querySelector('.add-button');
+const popupCloseButtons = document.querySelectorAll('.popup__close');
+const profileEditButton = document.querySelector('.profile__edit');
 
 // Шаблон для фото
 const photosContainer = document.querySelector('.element-grid');
 const photoTemplate = document.querySelector('#element-grid-template');
 
 // Попапы
-const popup = document.querySelector('.popup');
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupPhotoCard = document.querySelector('.popup_type_photo');
 
@@ -21,79 +23,47 @@ const profileJob = document.querySelector('.profile__job');
 
 // Фото
 const formPhoto = document.querySelector('.popup__form_photo-type');
+const inputList = Array.from(formPhoto.querySelectorAll('.popup__input'));
+const buttonElement = formPhoto.querySelector('.popup__submit');
+
 const photoTitleInput = document.querySelector('.popup__input_type_title');
 const photoLinkInput = document.querySelector('.popup__input_type_src');
 
-const elementTemplate = document.querySelector('.element-grid-template').content;
+const popupModal = document.querySelector('.popup_type_modal');
+const image = popupModal.querySelector('.popup__pic');
+const modalTitle = popupModal.querySelector('.popup__caption');
 
 
-// Инициализируем карточки
-function createCardElement(name, link) {
-  function handleDeletePhoto(e) {
-      e.target.closest('.element-grid__item').remove();
-  }
+initialCards.forEach((item) => {
+  const card = new Card(item, '#element-grid-template');
 
-  function handleLike(e) {
-    e.target.classList.toggle('element-grid__like_active');
-  }
+	const cardElement = card.generateCard();
 
-  const newCard = photoTemplate.content.querySelector('.element-grid__item').cloneNode(true);
-  const photo = newCard.querySelector('.element-grid__pic');
-  const photoTitle = newCard.querySelector('.element-grid__title');
-  const deleteButton = newCard.querySelector('.element-grid__delete');
-  const likeButton = newCard.querySelector('.element-grid__like');
-
-  photoTitle.textContent = name;
-  photo.alt = name;
-  photo.src = link;
-
-  function openImage() {
-
-    const popupModal = document.querySelector('.popup_type_modal');
-    const image = popupModal.querySelector('.popup__pic');
-    const modalTitle = popupModal.querySelector('.popup__caption');
-
-    openPopup(popupModal);
-    modalTitle.textContent = name;
-    image.alt = name;
-    image.src = link;
-
-  }
-
-  deleteButton.addEventListener('click', handleDeletePhoto);
-  likeButton.addEventListener('click', handleLike);
-  photo.addEventListener('click', openImage);
-
-  return newCard;
-}
-
-initialCards.forEach(function(item) {
-  const newCard = createCardElement(item.name, item.link);
-  photosContainer.append(newCard);
+	photosContainer.append(cardElement);
 });
 
 // Обработчик «отправки» формы карточки
-function handleFormProfile (evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+function handlePhotoFormSubmit (evt) {
+    evt.preventDefault();
 
-    // Форма добавления фото
-      photosContainer.prepend(createCardElement(photoTitleInput.value, photoLinkInput.value));
-      // Очищаем поля
-      photoTitleInput.value = '';
-      photoLinkInput.value = '';
+    const data = {};
+    data.name = photoTitleInput.value;
+    data.link = photoLinkInput.value;
 
-      const inputList = Array.from(formPhoto.querySelectorAll('.popup__input'));
-      const buttonElement = formPhoto.querySelector('.popup__submit');
-      toggleButtonState(inputList, buttonElement);
+    const card = new Card(data, '#element-grid-template');
+	  const cardElement = card.generateCard();
+
+    photosContainer.prepend(cardElement);
+
+    // Очищаем поля
+    formPhoto.reset();
+
+    // Делаем кнопку неактивной
+    toggleButtonState(inputList, buttonElement);
 
     // Закрываем попап
     closePopup(popupPhotoCard);
 }
-
-// Открытие попапа
-function openPopup(event) {
-  event.classList.add("popup_open")
- };
 
 //Попап Профиля
 function openPopupProfile() {
@@ -103,10 +73,12 @@ function openPopupProfile() {
  };
 
 //Обработчик формы профиля
- function handleSubmitProfile(event) {
+ function handleProfileFormSubmit(event) {
   event.preventDefault();
+
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
+
   closePopup(popupProfile);
 };
 
@@ -115,34 +87,43 @@ function openPopupPhoto() {
   openPopup(popupPhotoCard);
 };
 
+// Открытие попапа
+function openPopup(popup) {
+  popup.addEventListener("mousedown", overlayHandler);
+  document.addEventListener("keydown", keyHandler);
+  popup.classList.add("popup_open");
+ };
+
 //Закрытие попапов
-closeButtons.forEach((button) => {
+popupCloseButtons.forEach((button) => {
   const popup = button.closest(".popup");
   button.addEventListener("click", () => closePopup(popup));
 });
+
 function closePopup(popup) {
-  popup.classList.remove("popup_open")
+  popup.removeEventListener("mousedown", overlayHandler);
+  document.removeEventListener("keydown", keyHandler);
+  popup.classList.remove("popup_open");
 };
 
+
+function closeOpenedPopup() {
+  const openedPopup = document.querySelector(".popup_open");
+  closePopup(openedPopup);
+};
+
+
 function keyHandler(evt) {
-  // проверяем есть ли открытый попап и только тогда закрываем
-  const activePopup = document.querySelector('.popup_open');
-  if (activePopup && evt.key === 'Escape') {
-    closePopup(activePopup);
+  if (evt.key === 'Escape') {
+    closeOpenedPopup();
   }
 }
 
 function overlayHandler(evt) {
-  const activePopup = document.querySelector('.popup_open');
-
-  if (activePopup && evt.target === activePopup ) {
-    closePopup(activePopup);
+  if (evt.target === evt.currentTarget) {
+    closeOpenedPopup(evt.currentTarget);
   }
 }
-
-// включение валидации вызовом enableValidation
-// включение валидации вызовом enableValidation
-// все настройки передаются при вызове
 
 const config = {
   formSelector: '.popup__form',
@@ -156,11 +137,9 @@ const config = {
 enableValidation(config);
 
 //События
-addCardButton.addEventListener('click',openPopupPhoto);
-editProfileButton.addEventListener('click', openPopupProfile);
+cardAddButton.addEventListener('click',openPopupPhoto);
+profileEditButton.addEventListener('click', openPopupProfile);
 
-formProfile.addEventListener('submit', handleSubmitProfile);
-formPhoto.addEventListener('submit', handleFormProfile);
+formProfile.addEventListener('submit', handleProfileFormSubmit);
+formPhoto.addEventListener('submit', handlePhotoFormSubmit);
 
-document.addEventListener('keydown', keyHandler);
-document.addEventListener('click', overlayHandler);
