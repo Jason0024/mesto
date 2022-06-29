@@ -1,3 +1,6 @@
+//Импорт модуля
+//import Card from './Card.js';
+
 // Кнопки
 const cardAddButton  = document.querySelector('.add-button');
 const popupCloseButtons = document.querySelectorAll('.popup__close');
@@ -20,6 +23,9 @@ const profileJob = document.querySelector('.profile__job');
 
 // Фото
 const formPhoto = document.querySelector('.popup__form_photo-type');
+const inputList = Array.from(formPhoto.querySelectorAll('.popup__input'));
+const buttonElement = formPhoto.querySelector('.popup__submit');
+
 const photoTitleInput = document.querySelector('.popup__input_type_title');
 const photoLinkInput = document.querySelector('.popup__input_type_src');
 
@@ -27,57 +33,33 @@ const popupModal = document.querySelector('.popup_type_modal');
 const image = popupModal.querySelector('.popup__pic');
 const modalTitle = popupModal.querySelector('.popup__caption');
 
-// Инициализируем карточки
-function createCardElement(name, link) {
-  const newCard = photoTemplate.content.querySelector('.element-grid__item').cloneNode(true);
-  const photo = newCard.querySelector('.element-grid__pic');
-  const photoTitle = newCard.querySelector('.element-grid__title');
-  const buttonDelete = newCard.querySelector('.element-grid__delete');
-  const buttonLike = newCard.querySelector('.element-grid__like');
 
-  photoTitle.textContent = name;
-  photo.alt = name;
-  photo.src = link;
+initialCards.forEach((item) => {
+  const card = new Card(item, '#element-grid-template');
 
-  function openImage() {
-    modalTitle.textContent = name;
-    image.alt = name;
-    image.src = link;
-    openPopup(popupModal);
-  }
+	const cardElement = card.generateCard();
 
-  buttonDelete.addEventListener('click', handleDeletePhoto);
-  buttonLike.addEventListener('click', handleLike);
-  photo.addEventListener('click', openImage);
-
-  return newCard;
-}
-
-function handleDeletePhoto(e) {
-  e.target.closest('.element-grid__item').remove();
-}
-
-function handleLike(e) {
-  e.target.classList.toggle('element-grid__like_active');
-}
-
-initialCards.forEach(function(item) {
-  const newCard = createCardElement(item.name, item.link);
-  photosContainer.append(newCard);
+	photosContainer.append(cardElement);
 });
 
 // Обработчик «отправки» формы карточки
-function handleFormProfile (evt) {
+function handlePhotoFormSubmit (evt) {
     evt.preventDefault();
 
-    // Форма добавления фото
-      photosContainer.prepend(createCardElement(photoTitleInput.value, photoLinkInput.value));
-      // Очищаем поля
-      formPhoto.reset();
+    const data = {};
+    data.name = photoTitleInput.value;
+    data.link = photoLinkInput.value;
 
-      const inputList = Array.from(formPhoto.querySelectorAll('.popup__input'));
-      const buttonElement = formPhoto.querySelector('.popup__submit');
-      toggleButtonState(inputList, buttonElement);
+    const card = new Card(data, '#element-grid-template');
+	  const cardElement = card.generateCard();
+
+    photosContainer.prepend(cardElement);
+
+    // Очищаем поля
+    formPhoto.reset();
+
+    // Делаем кнопку неактивной
+    toggleButtonState(inputList, buttonElement);
 
     // Закрываем попап
     closePopup(popupPhotoCard);
@@ -91,10 +73,12 @@ function openPopupProfile() {
  };
 
 //Обработчик формы профиля
- function handleSubmitProfile(event) {
+ function handleProfileFormSubmit(event) {
   event.preventDefault();
+
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
+
   closePopup(popupProfile);
 };
 
@@ -156,6 +140,6 @@ enableValidation(config);
 cardAddButton.addEventListener('click',openPopupPhoto);
 profileEditButton.addEventListener('click', openPopupProfile);
 
-formProfile.addEventListener('submit', handleSubmitProfile);
-formPhoto.addEventListener('submit', handleFormProfile);
+formProfile.addEventListener('submit', handleProfileFormSubmit);
+formPhoto.addEventListener('submit', handlePhotoFormSubmit);
 
