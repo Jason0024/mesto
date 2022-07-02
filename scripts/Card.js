@@ -1,4 +1,4 @@
-class Card {
+export default class Card {
     //Переедаем данные карточки и cardSelector
     constructor(data, cardSelector) {
         this._name = data.name;
@@ -55,18 +55,6 @@ class Card {
     _handleCardDelete() {
         this._element.remove();
     }
-
-    _handlePhotoFormSubmit (evt) {
-        evt.preventDefault();
-        photosContainer.prepend(generateCard());
-    
-        formPhoto.reset();
-    
-        // Делаем кнопку неактивной
-        toggleButtonState(inputList, buttonElement);
-    
-        closePopup(popupPhotoCard);
-      }
 
       generateCard() {
         this._getTemplate();
