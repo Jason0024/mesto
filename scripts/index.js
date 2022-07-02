@@ -1,5 +1,7 @@
-//Импорт модуля
-//import Card from './Card.js';
+//Импорт модулей
+import FormValidator from './FormValidator.js';
+import Card from './Card.js';
+import { initialCards } from './initialsCards.js'
 
 // Кнопки
 const cardAddButton  = document.querySelector('.add-button');
@@ -59,7 +61,7 @@ function handlePhotoFormSubmit (evt) {
     formPhoto.reset();
 
     // Делаем кнопку неактивной
-    toggleButtonState(inputList, buttonElement);
+    validation.toggleButtonState(inputList, buttonElement);
 
     // Закрываем попап
     closePopup(popupPhotoCard);
@@ -67,9 +69,14 @@ function handlePhotoFormSubmit (evt) {
 
 //Попап Профиля
 function openPopupProfile() {
+  openPopup(popupProfile);
+
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  openPopup(popupProfile);
+
+
+  validation.checkInputValidity(formProfile, nameInput);
+  validation.checkInputValidity(formProfile, jobInput);
  };
 
 //Обработчик формы профиля
@@ -125,8 +132,8 @@ function overlayHandler(evt) {
   }
 }
 
-const config = {
-  formSelector: '.popup__form',
+export const config = {
+  //formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__submit',
   inactiveButtonClass: 'popup__submit_disabled',
@@ -134,7 +141,8 @@ const config = {
   errorClass: 'popup__input-error_active'
 };
 
-enableValidation(config);
+const validation = new FormValidator(config, '.popup__form');
+validation.enableValidation('.popup__form');
 
 //События
 cardAddButton.addEventListener('click',openPopupPhoto);
