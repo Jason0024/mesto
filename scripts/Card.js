@@ -1,3 +1,5 @@
+import { popupModal, modalSrc, modalTitle, openPopup} from '../scripts/index.js'
+
 export default class Card {
     //Переедаем данные карточки и cardSelector
     constructor(data, cardSelector) {
@@ -36,14 +38,10 @@ export default class Card {
 
     //Модальное окно для просмотра карточки
     _handleCardClic() {
-        const _popupModal = document.querySelector('.popup_type_modal');
-        const _modalSrc = document.querySelector('.popup__pic');
-        const _modalTitle = document.querySelector('.popup__caption');
-
-        openPopup(_popupModal);
-        _modalTitle.textContent = this._name;
-        _modalSrc.alt = this._name;
-        _modalSrc.src = this._link;
+        openPopup(popupModal);
+        modalTitle.textContent = this._name;
+        modalSrc.alt = this._name;
+        modalSrc.src = this._link;
     }
 
     //Лайк карточки
@@ -61,7 +59,6 @@ export default class Card {
         this._setEventListeners();
     
         this._element.querySelector('.element-grid__pic').src = this._link;
-        this._element.querySelector('.element-grid__pic').alt = this._name;
         this._element.querySelector('.element-grid__title').textContent = this._name;
     
         return this._element;
