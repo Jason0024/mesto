@@ -1,4 +1,4 @@
-class FormValidator {
+export default class FormValidator {
   constructor(config, formElement) {
 
     this._inputSelector = config.inputSelector;
@@ -36,16 +36,13 @@ class FormValidator {
 
   _setEventListeners () {
     // проверяем состояние кнопки в самом начале
-    this._toggleButtonState();
+    this.toggleButtonState();
     
     this._inputList.forEach((inputElement) => {
-      // проверяем заполнены ли поля и делаем предварительную проверку в самом начале
-      inputElement.value ? this._checkInputValidity(inputElement) : '';
-
       // валидируем при изменении полей
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState();
+        this.toggleButtonState();
       });
     });
   };
@@ -58,8 +55,8 @@ class FormValidator {
     }
   };
 
-  _toggleButtonState () {
-    if (this._hasInvalidInput(this._inputList)) {
+  toggleButtonState () {
+    if (this._hasInvalidInput()) {
       this._buttonElement.setAttribute('disabled', true);
       this._buttonElement.classList.add(this._inactiveButtonClass);
     } else {
@@ -70,14 +67,8 @@ class FormValidator {
     
 
   enableValidation() {
-    this._formElement.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-    });
-
     this._setEventListeners();
   };
-
 }
 
-export default FormValidator;
 

@@ -7,6 +7,7 @@ export default class Card {
         this._link = data.link;
 
         this._cardSelector = cardSelector;
+        
     }
 
     //Получаем разметку
@@ -17,7 +18,7 @@ export default class Card {
         .querySelector('.element-grid__item')
         .cloneNode(true);
 
-        this._element = cardElement;
+        return cardElement;
     }
 
     //Устанавливаем метод слушателей событий
@@ -55,10 +56,11 @@ export default class Card {
     }
 
       generateCard() {
-        this._getTemplate();
+        this._element = this._getTemplate();
         this._setEventListeners();
     
         this._element.querySelector('.element-grid__pic').src = this._link;
+        this._element.querySelector('.element-grid__pic').alt = this._name;
         this._element.querySelector('.element-grid__title').textContent = this._name;
     
         return this._element;

@@ -76,7 +76,7 @@ function keyHandler(evt) {
 //Закрытие попапа по Overlay
 function overlayHandler(evt) {
   if (evt.target === evt.currentTarget) {
-    closeOpenedPopup(evt.currentTarget);
+    closeOpenedPopup();
   }
 }
 
@@ -99,9 +99,6 @@ function handlePhotoFormSubmit (evt) {
 
   // Очищаем поля
   formPhoto.reset();
-
-  // Делаем кнопку неактивной
-  validatePhoto.enableValidation();
 
   closePopup(popupPhotoCard);
 }
@@ -131,7 +128,6 @@ function openPopupProfile() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 
-  validateProfile.enableValidation();
  };
 
 
