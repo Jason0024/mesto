@@ -76,7 +76,7 @@ function keyHandler(evt) {
 //Закрытие попапа по Overlay
 function overlayHandler(evt) {
   if (evt.target === evt.currentTarget) {
-    closeOpenedPopup();
+    closePopup(evt.currentTarget);
   }
 }
 
@@ -99,6 +99,9 @@ function handlePhotoFormSubmit (evt) {
 
   // Очищаем поля
   formPhoto.reset();
+
+  //Делаем кнопку неактивной
+  validatePhoto.toggleButtonState();
 
   closePopup(popupPhotoCard);
 }

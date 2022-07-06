@@ -19,15 +19,16 @@ export default class Card {
         .cloneNode(true);
 
         return cardElement;
+
     }
 
     //Устанавливаем метод слушателей событий
     _setEventListeners() {
-        this._element.querySelector('.element-grid__pic').addEventListener('click', () => {
+        this._cardImage.addEventListener('click', () => {
             this._handleCardClic();
         });
     
-        this._element.querySelector('.element-grid__like').addEventListener('click', () => {
+        this._likeButton.addEventListener('click', () => {
             this._handleCardLike();
         });
         
@@ -47,7 +48,7 @@ export default class Card {
 
     //Лайк карточки
     _handleCardLike() {
-        this._element.querySelector('.element-grid__like').classList.toggle('element-grid__like_active');   
+        this._likeButton.classList.toggle('element-grid__like_active');   
     }
 
     //Удаление карточки
@@ -57,11 +58,15 @@ export default class Card {
 
       generateCard() {
         this._element = this._getTemplate();
-        this._setEventListeners();
+
+        this._cardImage = this._element.querySelector('.element-grid__pic');
+        this._likeButton = this._element.querySelector('.element-grid__like');
     
-        this._element.querySelector('.element-grid__pic').src = this._link;
-        this._element.querySelector('.element-grid__pic').alt = this._name;
+        this._cardImage.src = this._link;
+        this._cardImage.alt = this._name;
         this._element.querySelector('.element-grid__title').textContent = this._name;
+
+        this._setEventListeners();
     
         return this._element;
       }
