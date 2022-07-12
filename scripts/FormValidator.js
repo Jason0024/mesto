@@ -15,7 +15,7 @@ export default class FormValidator {
 
   _showInputError = (inputElement, errorMessage) => {
     const _errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
-  
+
     inputElement.classList.add(this._inputErrorClass);
     _errorElement.classList.add(this._errorClass);
     _errorElement.textContent = errorMessage;
@@ -28,16 +28,16 @@ export default class FormValidator {
     _errorElement.textContent = '';
   };
 
-  _hasInvalidInput () {
+  _hasInvalidInput() {
     return this._inputList.some((input) => {
       return !input.validity.valid;
     });
   };
 
-  _setEventListeners () {
+  _setEventListeners() {
     // проверяем состояние кнопки в самом начале
     this.toggleButtonState();
-    
+
     this._inputList.forEach((inputElement) => {
       // валидируем при изменении полей
       inputElement.addEventListener('input', () => {
@@ -55,7 +55,7 @@ export default class FormValidator {
     }
   };
 
-  toggleButtonState () {
+  toggleButtonState() {
     if (this._hasInvalidInput()) {
       this._buttonElement.setAttribute('disabled', true);
       this._buttonElement.classList.add(this._inactiveButtonClass);
@@ -63,8 +63,8 @@ export default class FormValidator {
       this._buttonElement.classList.remove(this._inactiveButtonClass);
       this._buttonElement.removeAttribute('disabled');
     }
-  }; 
-    
+  };
+
 
   enableValidation() {
     this._setEventListeners();

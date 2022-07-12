@@ -1,4 +1,4 @@
-import { popupModal, modalSrc, modalTitle, openPopup} from '../scripts/index.js'
+import { popupModal, modalSrc, modalTitle, openPopup } from '../scripts/index.js'
 
 export default class Card {
     //Переедаем данные карточки и cardSelector
@@ -7,16 +7,16 @@ export default class Card {
         this._link = data.link;
 
         this._cardSelector = cardSelector;
-        
+
     }
 
     //Получаем разметку
     _getTemplate() {
         const cardElement = document
-        .querySelector(this._cardSelector)
-        .content
-        .querySelector('.element-grid__item')
-        .cloneNode(true);
+            .querySelector(this._cardSelector)
+            .content
+            .querySelector('.element-grid__item')
+            .cloneNode(true);
 
         return cardElement;
 
@@ -27,11 +27,11 @@ export default class Card {
         this._cardImage.addEventListener('click', () => {
             this._handleCardClic();
         });
-    
+
         this._likeButton.addEventListener('click', () => {
             this._handleCardLike();
         });
-        
+
         this._element.querySelector('.element-grid__delete').addEventListener('click', () => {
             this._handleCardDelete();
         });
@@ -48,7 +48,7 @@ export default class Card {
 
     //Лайк карточки
     _handleCardLike() {
-        this._likeButton.classList.toggle('element-grid__like_active');   
+        this._likeButton.classList.toggle('element-grid__like_active');
     }
 
     //Удаление карточки
@@ -56,18 +56,18 @@ export default class Card {
         this._element.remove();
     }
 
-      generateCard() {
+    generateCard() {
         this._element = this._getTemplate();
 
         this._cardImage = this._element.querySelector('.element-grid__pic');
         this._likeButton = this._element.querySelector('.element-grid__like');
-    
+
         this._cardImage.src = this._link;
         this._cardImage.alt = this._name;
         this._element.querySelector('.element-grid__title').textContent = this._name;
 
         this._setEventListeners();
-    
+
         return this._element;
-      }
+    }
 }

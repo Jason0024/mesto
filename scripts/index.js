@@ -4,7 +4,7 @@ import Card from './Card.js';
 import { initialCards } from './initialsCards.js'
 
 // Кнопки
-const cardAddButton  = document.querySelector('.add-button');
+const cardAddButton = document.querySelector('.add-button');
 const profileEditButton = document.querySelector('.profile__edit');
 
 // Шаблон для фото
@@ -47,16 +47,16 @@ const config = {
 };
 
 // Открытие попапа
-export function openPopup(popupName) {  
+export function openPopup(popupName) {
   // добавляем обработчики закрытия по Escape и клику на overlay
   popupName.addEventListener("mousedown", overlayHandler);
   document.addEventListener("keydown", keyHandler);
 
   popupName.classList.add("popup_open");
- };
+};
 //Закрытие попапа
- function closePopup(popupName) {
-   // добавляем обработчики закрытия по Escape и клику на overlay
+function closePopup(popupName) {
+  // добавляем обработчики закрытия по Escape и клику на overlay
   popupName.removeEventListener("mousedown", overlayHandler);
   document.removeEventListener("keydown", keyHandler);
 
@@ -87,14 +87,14 @@ function createCard(item) {
 }
 
 // Обработчик формы для добавления фото
-function handlePhotoFormSubmit (evt) {
+function handlePhotoFormSubmit(evt) {
   evt.preventDefault();
 
   const data = {};
   data.name = photoTitleInput.value;
   data.link = photoLinkInput.value;
 
-	const newCard = createCard(data);
+  const newCard = createCard(data);
   photosContainer.prepend(newCard);
 
   // Очищаем поля
@@ -108,17 +108,17 @@ function handlePhotoFormSubmit (evt) {
 
 // Подгружаем первые карточки
 initialCards.forEach((item) => {
-	const cardElement = createCard(item);
-	photosContainer.append(cardElement);
+  const cardElement = createCard(item);
+  photosContainer.append(cardElement);
 });
 
 // Обработчик «отправки» формы
-function handleProfileFormSubmit (evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
   // Получите значение полей jobInput и nameInput из свойства value
   profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value; 
+  profileJob.textContent = jobInput.value;
 
   // Закрываем попап
   closePopup(popupProfile);
@@ -131,7 +131,7 @@ function openPopupProfile() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 
- };
+};
 
 
 
