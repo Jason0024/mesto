@@ -1,4 +1,4 @@
-import { popupModal, modalSrc, modalTitle, openPopup } from '../scripts/index.js'
+import { popupModal, modalSrc, modalTitle, openPopup } from '../pages/index.js'
 
 export default class Card {
     //Переедаем данные карточки и cardSelector

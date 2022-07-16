@@ -1,7 +1,7 @@
 //Импорт модулей
-import FormValidator from './FormValidator.js';
-import Card from './Card.js';
-import { initialCards } from './initialsCards.js'
+import FormValidator from '../components/FormValidator.js';
+import Card from '../components/Card.js';
+import { initialCards } from '../utils/initialsCards.js'
 
 // Кнопки
 const cardAddButton = document.querySelector('.add-button');
