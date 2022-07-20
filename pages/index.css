@@ -22,6 +22,7 @@
 /* Стили для секции profile Конец */
 
 /* Стили для секции elements Начало */
+@import url(../blocks/elements/elemenst.css);
 @import url(../blocks/element-grid/element-grid.css);
 @import url(../blocks/element-grid/__item/element-grid__item.css);
 @import url(../blocks/element-grid/__delete/element-grid__delete.css);
@@ -49,7 +50,7 @@
 @import url(../blocks/popup/__pic/popup__pic.css);
 @import url(../blocks/popup/__caption/popup__caption.css);
 @import url(../blocks/popup/__input/_type/popup__input_type_error.css);
-@import url(../blocks/popup/__submit/_disabled/popup__submit_disabled.css);
 @import url(../blocks/popup/__input-error/popup__input-error.css);
 @import url(../blocks/popup/__input-error/_active/popup__input-error_active.css);
+@import url(../blocks/popup/__figure/popup__figure.css);
 /* Стили для popup Конец */
