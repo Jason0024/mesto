@@ -1,3 +1,4 @@
+import '../../pages/index.css';
 //Импорт модулей
 import { nameInput, jobInput, config, initialCards, cardAddButton, profileEditButton,
          cardsContainer, formEditProfile, formAddNewCard } from '../utils/constants.js'
