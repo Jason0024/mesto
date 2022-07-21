@@ -1,4 +1,4 @@
-import '../../pages/index.css';
+import './index.css';
 //Импорт модулей
 import { nameInput, jobInput, config, initialCards, cardAddButton, profileEditButton,
          cardsContainer, formEditProfile, formAddNewCard } from '../utils/constants.js'
@@ -12,18 +12,20 @@ import UserInfo from "../components/UserInfo.js";
 
 /* Функции */
 // Заносим данные в форму попапа редактирования профиля
-export function fillInEditProfileFormInputs({ username, job }) {
+function fillInEditProfileFormInputs({ username, job }) {
   nameInput.value = username;
   jobInput.value = job;
 };
+
+/* Попап просмотра изображения */
+const viewImagePopup = new PopupWithImage('.popup_type_modal');
+viewImagePopup.setEventListeners();
 
 // Функционал создания новой карточки
 const createCard = (data) => {
   const card = new Card({
     data: data,
     handleCardClick: (name, link) => {
-      const viewImagePopup = new PopupWithImage('.popup_type_modal');
-      viewImagePopup.setEventListeners();
       viewImagePopup.open(name, link);
     }}, '.element-grid-template');
   const cardElement = card.generateCard();
@@ -38,14 +40,14 @@ const userInfo = new UserInfo({
 });
 
 // Создание попапа с формой редактирования профиля
-const editProfilePopup = new PopupWithForm({
+const popupEditProfile = new PopupWithForm({
   popupSelector: '.popup_type_profile',
   handleFormSubmit: (dataForm) => {
     userInfo.setUserInfo(dataForm);
-    editProfilePopup.close();
+    popupEditProfile.close();
   }
 });
-editProfilePopup.setEventListeners();
+popupEditProfile.setEventListeners();
 
 // Обработчик кнопки Edit попапа редактирования профиля
 profileEditButton.addEventListener('click', () => {
@@ -54,7 +56,7 @@ profileEditButton.addEventListener('click', () => {
     username: info.username,
     job: info.job
   });
-  editProfilePopup.open();
+  popupEditProfile.open();
 });
 
 /* Карточки с изображениями */
@@ -66,11 +68,12 @@ const addCardPopup = new PopupWithForm({
     addCardPopup.close();
   }
 });
-
 // добавляем слушатели этому попапу:
 addCardPopup.setEventListeners();
+
 // обработчик открытия попапа
 cardAddButton.addEventListener('click', () => {
+  formAddNewCardValidator.toggleButtonState();
   addCardPopup.open();
 })
 // отрисовка карточек на странице из массива
