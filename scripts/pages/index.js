@@ -1,7 +1,7 @@
 import './index.css';
 //Импорт модулей
 import { nameInput, jobInput, config, initialCards, cardAddButton, profileEditButton,
-         cardsContainer, formEditProfile, formAddNewCard } from '../utils/constants.js'
+         cardsContainer, formEditProfile, formAddNewCard, buttonEditAvatar, formEditAvatar, avatar } from '../utils/constants.js'
 import Section from "../components/Section.js";
 import FormValidator from '../components/FormValidator.js';
 import Card from '../components/Card.js';
@@ -49,6 +49,20 @@ const popupEditProfile = new PopupWithForm({
 });
 popupEditProfile.setEventListeners();
 
+const editAvatarPopup = new PopupWithForm({
+  popupSelector: '.popup_type_avatar',
+  handleFormSubmit: (data) => {
+    avatar.src = data.link;
+    editAvatarPopup.close();
+  }
+});
+editAvatarPopup.setEventListeners();
+// Обработчик кнопки Edit аватара пользователя
+buttonEditAvatar.addEventListener('click', () => {
+  formEditAvatarValidator.toggleButtonState();
+  editAvatarPopup.open();
+});
+
 // Обработчик кнопки Edit попапа редактирования профиля
 profileEditButton.addEventListener('click', () => {
   const info = userInfo.getUserInfo();
@@ -86,6 +100,9 @@ const cardsList = new Section({
 cardsList.renderItems();
 
 /* Валидация форм */
+// Валидация формы редактирования аватара пользователя
+const formEditAvatarValidator = new FormValidator(config, formEditAvatar);
+formEditAvatarValidator.enableValidation();
 // валидация формы редактирования профиля
 const formEditProfileValidator = new FormValidator(config, formEditProfile);
 formEditProfileValidator.enableValidation();

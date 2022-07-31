@@ -30,6 +30,12 @@ export const modalTitle = popupModal.querySelector('.popup__caption');
 // находим контейнер для карточек
 export const cardsContainer = document.querySelector('.elements');
 
+// попап редактирования аватара пользователя
+export const popupEditAvatar = document.querySelector('.popup_type_avatar');
+export const formEditAvatar = popupEditAvatar.querySelector('.popup__form');
+export const buttonEditAvatar = document.querySelector('.profile__avatar-btn');
+export const avatar = document.querySelector('.profile__avatar');
+
 // Конфиг валидации
 export const config = {
   //formSelector: '.popup__form',
