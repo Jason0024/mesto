@@ -1,39 +1,25 @@
-export const cardAddButton = document.querySelector('.add-button');
-export const profileEditButton = document.querySelector('.profile__edit');
-export const photosContainer = document.querySelector('.element-grid');
-
-// Фото
-export const formPhoto = document.querySelector('.popup__form_photo-type');
-export const inputList = Array.from(formPhoto.querySelectorAll('.popup__input'));
-export const buttonElement = formPhoto.querySelector('.popup__submit');
-export const photoTitleInput = document.querySelector('.popup__input_type_title');
-export const photoLinkInput = document.querySelector('.popup__input_type_src');
-export const formProfile = document.querySelector('.popup__form_profile-type');
-
-export const popupPhotoCard = document.querySelector('.popup_type_photo');
-export const formAddNewCard = popupPhotoCard.querySelector('.popup__form');
-export const closePhotoButton = popupPhotoCard.querySelector('.popup__close');
-
-export const popupProfile = document.querySelector('.popup_type_profile');
-export const formEditProfile = popupProfile.querySelector('.popup__form');
+// Находим попап редактирования профиля
+export const popupEditProfile = document.querySelector('.popup_type_profile');
+// Находим кнопку для открытия попапа редактирования профиля
+export const profileEditBtn = document.querySelector('.profile__edit');
+// Находим форму попапа редактирования профиля
+export const formEditProfile = popupEditProfile.querySelector('.popup__form');
+// Находим инпуты формы попапа редактирования профиля
 export const nameInput = formEditProfile.querySelector('#name');
 export const jobInput = formEditProfile.querySelector('#job');
-
-export const closeProfileButton = popupProfile.querySelector('.popup__close');
-export const profileName = document.querySelector('.profile__name');
-export const profileJob = document.querySelector('.profile__job');
-export const popupModal = document.querySelector('.popup_type_modal');
-export const modalClose = popupModal.querySelector('.popup__close');
-export const modalSrc = popupModal.querySelector('.popup__pic');
-export const modalTitle = popupModal.querySelector('.popup__caption');
-
-// находим контейнер для карточек
-export const cardsContainer = document.querySelector('.elements');
-
-// попап редактирования аватара пользователя
+// Находим попап добавления карточки
+export const popupAddNewCard = document.querySelector('.popup_type_photo');
+// Находим кнопку для открытия попапа добавления новой карточки
+export const popupAddNewCardOpenBtn = document.querySelector('.add-button');
+// Находим форму попапа добавления новой карточки
+export const formAddNewCard = popupAddNewCard.querySelector('.popup__form');
+// Попап редактирования аватара пользователя
 export const popupEditAvatar = document.querySelector('.popup_type_avatar');
+// Форма редактирования аватара пользователя
 export const formEditAvatar = popupEditAvatar.querySelector('.popup__form');
+// Кнопка редактирования аватара пользователя
 export const buttonEditAvatar = document.querySelector('.profile__avatar-btn');
+// аватар пользователя
 export const avatar = document.querySelector('.profile__avatar');
 
 // Конфиг валидации
@@ -46,29 +32,4 @@ export const config = {
   errorClass: 'popup__input-error_active'
 };
 
-export const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+

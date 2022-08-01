@@ -27,6 +27,7 @@
 @import url(../../blocks/element-grid/element-grid.css);
 @import url(../../blocks/element-grid/__item/element-grid__item.css);
 @import url(../../blocks/element-grid/__delete/element-grid__delete.css);
+@import url(../../blocks/element-grid/__delete/_hidden/element-grid__delete_hidden.css);
 @import url(../../blocks/element-grid/__pic/element-grid__pic.css);
 @import url(../../blocks/element-grid/__item-description/element-grid__item-description.css);
 @import url(../../blocks/element-grid/__title/element-grid__title.css);
