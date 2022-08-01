@@ -30,7 +30,7 @@
 .popup_open{opacity:1;visibility:visible}
 .popup__container{background-color:#fff;border-radius:10px;box-shadow:0 0 25px rgba(0,0,0,.15);box-sizing:border-box;color:#000;max-width:430px;padding:34px 36px 37px;position:relative;width:100%}.popup_type_modal .popup__container{align-items:center;background:none;display:flex;flex-direction:column;max-width:75vw;padding:0;width:auto}@media screen and (max-width:600px){.popup__container{padding:25px 22px;width:282px}}
 .popup__title{font-size:24px;font-weight:900;line-height:29px;margin:0 0 54px}@media screen and (max-width:600px){.popup__title{font-size:18px;line-height:22px;margin-bottom:75px}}
-.popup__title_delete-card{font-size:24px;font-weight:900;line-height:29px;margin:0 0 20px}@media screen and (max-width:600px){.popup__title_delete-card{font-size:18px;line-height:22px;margin-bottom:75px}}
+.popup__title-delete-card{font-size:24px;font-weight:900;line-height:29px;margin:0 0 20px}@media screen and (max-width:600px){.popup__title-delete-card{font-size:18px;line-height:22px;margin-bottom:75px}}
 .popup__field{display:flex;flex-direction:column;margin-bottom:35px;position:relative}
 .popup__input{border:none;border-bottom:1px solid rgba(0,0,0,.2);font-size:14px;line-height:17px;padding-bottom:9px;width:100%}
 .popup__submit{background:#000;border:none;border-radius:2px;color:#fff;cursor:pointer;font-size:18px;height:50px;line-height:22px;margin-top:18px;padding:14px 0 18px;transition:opacity .4s ease-in-out;width:100%}.popup__submit:hover{opacity:.6}@media screen and (max-width:600px){.popup__submit{font-size:14px;line-height:17px;margin-top:15px;padding:14px 0}}
