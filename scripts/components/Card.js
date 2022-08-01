@@ -42,9 +42,9 @@ export default class Card {
       this._handleCardLike();
     });
 
-    this._element.querySelector('.element-grid__delete').addEventListener('click', () => {
-      this._handleCardDelete();
-    });
+    //this._element.querySelector('.element-grid__delete').addEventListener('click', () => {
+    //  this._handleCardDelete();
+    //});
 
   }
 

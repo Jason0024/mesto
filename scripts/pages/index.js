@@ -99,6 +99,19 @@ const cardsList = new Section({
 }, cardsContainer);
 cardsList.renderItems();
 
+/* Попап удаления карточки */
+const deleteCardPopup = new PopupWithForm({
+  popupSelector: '.popup_type_delete-card',
+  handleFormSubmit: (event) => {
+    console.log(event.target);
+  }
+});
+deleteCardPopup.setEventListeners();
+const deleteBtn = document.querySelector('.element-grid__delete');
+deleteBtn.addEventListener('click', () => {
+  deleteCardPopup.open();
+});
+
 /* Валидация форм */
 // Валидация формы редактирования аватара пользователя
 const formEditAvatarValidator = new FormValidator(config, formEditAvatar);
