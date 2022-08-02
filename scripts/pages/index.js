@@ -39,7 +39,8 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
 const userInfo = new UserInfo({
   username: '.profile__name',
   job: '.profile__job',
-  avatar: '.profile__avatar'
+  avatar: '.profile__avatar',
+  api
 });
 
 // Создание попапа с формой редактирования профиля
@@ -84,16 +85,18 @@ const editAvatarPopup = new PopupWithForm({
       .finally(() => {
         editAvatarPopup.loading(false);
       });
-  }
+  }, api
 });
 editAvatarPopup.setEventListeners();
 // Обработчик кнопки Edit аватара пользователя
 buttonEditAvatar.addEventListener('click', () => {
   formEditAvatarValidator.toggleButtonState();
+  formEditAvatarValidator.resetValidation();
   editAvatarPopup.open();
 });
 // Обработчик кнопки Edit попапа редактирования профиля
 profileEditBtn.addEventListener('click', () => {
+  formEditProfileValidator.resetValidation();
   const info = userInfo.getUserInfo();
   fillInEditProfileFormInputs({
     username: info.username,
@@ -104,7 +107,7 @@ profileEditBtn.addEventListener('click', () => {
 
 /* ----------- Карточки с изображениями ----------- */
 
-// функционал создания новой карточки
+// Функционал создания новой карточки
 const createCard = (data) => {
   const card = new Card({
     data: data,
@@ -151,6 +154,7 @@ addCardPopup.setEventListeners();
 // обработчик открытия попапа
 popupAddNewCardOpenBtn.addEventListener('click', () => {
   formAddNewCardValidator.toggleButtonState();
+  formAddNewCardValidator.resetValidation();
   addCardPopup.open();
 });
 

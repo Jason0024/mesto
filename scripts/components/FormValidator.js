@@ -31,6 +31,15 @@ export default class FormValidator {
     }
   };
 
+  resetValidation() {
+    this.toggleButtonState();
+
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement)
+    });
+
+  }
+
   // проверка валидность поля ввода
   _hasInvalidInput() {
     return this._inputList.some((inputElement) => {
