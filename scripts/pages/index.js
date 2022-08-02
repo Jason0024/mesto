@@ -72,11 +72,11 @@ function fillInEditProfileFormInputs({ username, job }) {
 // Создание попапа редактирования аватара пользователя
 const editAvatarPopup = new PopupWithForm({
   popupSelector: '.popup_type_avatar',
-  handleFormSubmit: (data) => {
+  handleFormSubmit: ({avatar}) => {
     editAvatarPopup.loading(true);
-    api.editAvatar(data)
-      .then((data) => {
-        avatar.src = data.avatar;
+    api.editAvatar({avatar})
+      .then(({avatar}) => {
+        userInfo.setUserAvatar({avatar: avatar})
         editAvatarPopup.close();
       })
       .catch((err) => {
